@@ -1,19 +1,20 @@
 import copy
-inits = [["A", "B"], ["C", "D"]]
+initial_state = [["A", "B"], ["C", "D"]]
 '''
          [A]   [C]
     _____[B]___[D]______
 '''
-goals = [["A", "B", "D"]]
+goal_state = [["A", "B", "D"]]
 
 '''
          [A]   
          [B]
       ___[D]_____
 '''
+# change input style
 
 
-current_state = copy.deepcopy(inits)
+current_state = copy.deepcopy(initial_state)
 arm_content = " "
 
 def print_current_state():
@@ -35,7 +36,7 @@ def print_current_state():
                 print("    ", sep="", end="")
         max_length -= 1
         print('')
-    print("__________________________________\n")
+    print("-------------------------------\n")
 
 def print_arm_content():
     global arm_content
@@ -52,8 +53,7 @@ print("INITIAL STATE")
 print_current_state()
 
 def stack_boxes(box):  # pass box jiske upar stack karna hai
-    global current_state
-    global arm_content
+    global current_state, arm_content
     stack_of_box = -1
     for i in range(len(current_state)):
         if current_state[i][0] == box:
@@ -92,68 +92,68 @@ def putdown():
 
 arm = None
 
-# Database:-
-on_table_elements = set()
-middle_elements = set()
-clear_elements = set()
+'''
+list to keep track of 
+1. all elements touching table
+2. all elements in the middle
+3. all elements at top
+'''
+on_table_elements = []
+middle_elements = []
+clear_elements = []
 
-# ---------------------------------------------------------------------------
-
-for i in inits:
-    clear_elements.add(i[0])  # first in list is clear
-    on_table_elements.add(i[-1])  # last in list is on table
-    for j in range(len(i) - 1):
-        middle_elements.add(i[j] + "*" + i[j + 1])  # 2 * 3 , 3 * 4   ---> 2 on 3 || 3 on 4
+for column in initial_state:
+    clear_elements.append(column[0]) #First box will always b clear
+    on_table_elements.append(column[-1])  # last box will always be on table
+    for j in range(len(column) - 1):
+        middle_elements.append(column[j] + "$" + column[j + 1])  # 2 $ 3 , 3 $ 4   ---> 2 on 3 || 3 on 4
 
 
-def solve(predicate):
-    # predicate[0] -->  ON
-    # predicate[1] -->   1
-    # predicate[2] -->   2
-    global clear_elements, middle_elements, on_table_elements, arm
-
-    if predicate[0] == "ON":  # ON 1 2
-        if predicate[1] + "*" + predicate[2] in middle_elements:
+def solve(action):
+    global clear_elements, arm, middle_elements, on_table_elements
+    
+    if action[0] == "ON":  #predicate 1 on 2
+        if action[1] + "$" + action[2] in middle_elements:
             return
         else:  # We need to perform stack action, before that call its predicates
-            solve(["CL", predicate[2]])  # CLEAR 2
-            solve(["HL", predicate[1]])  # HOLDING 1
-            print("Stack", predicate[1], predicate[2])  # ''' Stack Action'''
-            stack_boxes(predicate[2])
+            solve(["IS_CLEAR", action[2]])  # CLEAR 2
+            solve(["ARM_IS_HOLDING", action[1]])  # HOLDING 1
+            print("Stack", action[1], action[2])  # ''' Stack Action'''
+            stack_boxes(action[2])
             print("UPDATED STATE:")
             print_current_state()
 
-            clear_elements.remove(predicate[2])  # Modify database once performed action
-            clear_elements.add(predicate[1])
-            middle_elements.add(predicate[1] + "*" + predicate[2])
+            clear_elements.remove(action[2])  # Modify database once performed action
+            clear_elements.append(action[1])
+            middle_elements.append(action[1] + "$" + action[2])
             arm = None
 
-    elif predicate[0] == "CL":  # CLEAR 1
-        if predicate[1] in clear_elements:  # To check if 1 is clear we need to traverse dbClear
+    elif action[0] == "IS_CLEAR":  # IS_CLEAR 1
+        if action[1] in clear_elements:  # To check if 1 is clear we need to traverse dbClear
             return
         else:  # If not clear ; To access block that is on (1 or a) i.e b
-            a = predicate[1]
+            a = action[1]
             b = None
             for i in middle_elements:  # Here we are traversing
                 if a == i[2]:
                     b = i[0]
                     break
-            if b == None: return  # If no such block found that means it is clear
+            if b is None: return  # If no such block found that means it is clear
             # Else we need to perform unstack operation , and before that statisy predicates
-            solve(["CL", b])
+            solve(["IS_CLEAR", b])
             solve(["ON", b, a])
             solve(["AE"])
             arm = b
-            clear_elements.add(a)
-            clear_elements.add(b)
-            on_table_elements.add(a)
-            middle_elements.remove(b + "*" + a)
+            clear_elements.append(a)
+            clear_elements.append(b)
+            on_table_elements.append(a)
+            middle_elements.remove(b + "$" + a)
             print("UnStack", b, a)  # ''' UnStack Action '''
             unstack_boxes(b)
             print("UPDATED STATE:")
             print_current_state()
 
-    elif predicate[0] == "AE":  # ARM EMPTY
+    elif action[0] == "AE":  # ARM EMPTY
         if arm == None:
             return
         else:  # If not arm empty perform putdown action
@@ -161,58 +161,58 @@ def solve(predicate):
             putdown()
             print("UPDATED STATE:")
             print_current_state()
-            on_table_elements.add(arm)
+            on_table_elements.append(arm)
             arm = None
 
-    elif predicate[0] == "ONT":  # ON TABLE 1
-        if predicate[1] in on_table_elements:
+    elif action[0] == "ONT":  # ON TABLE 1
+        if action[1] in on_table_elements:
             return  # check database
         else:
             b = None
-            a = predicate[1]
+            a = action[1]
             for i in middle_elements:  # If not ONTABLE check what is on it first
                 if a == i[2]:
                     b = i[0]
                     break
             if b == None: return
-            solve(["CL", b])
+            solve(["IS_CLEAR", b])
             solve(["ON", b, a])
             solve(["AE"])
             arm = b
-            clear_elements.add(a)
-            clear_elements.add(b)
-            on_table_elements.add(a)
-            middle_elements.remove(b + "*" + a)
+            clear_elements.append(a)
+            clear_elements.append(b)
+            on_table_elements.append(a)
+            middle_elements.remove(b + "$" + a)
             print("UnStack", b, a)  # '''  UNSTACK action '''
             unstack_boxes(b)
             print("UPDATED STATE:")
             print_current_state()
 
-    elif predicate[0] == "HL":  # Holding
-        if arm == predicate[1]:  # if holding somthing return else perform Pick UP action
+    elif action[0] == "ARM_IS_HOLDING":  # Holding
+        if arm == action[1]:  # if holding somthing return else perform Pick UP action
             return
         else:
-            solve(["CL", predicate[1]])
-            solve(["ONT", predicate[0]])
+            solve(["IS_CLEAR", action[1]])
+            solve(["ONT", action[0]])
             solve(["AE"])
 
-            arm = predicate[1]
+            arm = action[1]
             print("PickUp", arm)  # '''  PICK UP action '''
-            pickup(predicate[1])
+            pickup(action[1])
             print("UPDATED STATE:")
             print_current_state()
 
 
 # Start with satisfying goal state
-for i in goals:
-    solve(["CL", i[0]])
+for i in goal_state:
+    solve(["IS_CLEAR", i[0]])
     for j in range(len(i) - 2, -1, -1):
         solve(["ON", i[j], i[j + 1]])
     solve(["ONT", i[-1]])
     solve(["AE"])
 
-for i in goals:
-    solve(["CL", i[0]])
+for i in goal_state:
+    solve(["IS_CLEAR", i[0]])
     for j in range(len(i) - 2, -1, -1):
         solve(["ON", i[j], i[j + 1]])
     solve(["ONT", i[-1]])
