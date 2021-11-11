@@ -11,7 +11,6 @@ for i in lst:
     columns =[]
 
 initial_state = initial
-print(initial_state)
 
 lst2 = [item for item in input("ENTER THE GOAL STATE").split()]
 
@@ -24,25 +23,24 @@ for i in lst2:
     columns =[]
 
 goal_state = goal
-print(goal_state)
-
-# initial_state = [["A", "B"], ["C", "D"]]
-# '''
-#          [A]   [C]
-#     _____[B]___[D]______
-# '''
-# goal_state = [["A", "B", "D"]]
-#
-# '''
-#          [A]
-#          [B]
-#       ___[D]_____
-# '''
-# change input style
-
-
 current_state = copy.deepcopy(initial_state)
 arm_content = " "
+
+def current_state_text():
+    global current_state
+    global arm_content
+    output = []
+    if arm_content != " ":
+        output.append( "HOLD(" + arm_content + ")") # ARM
+    for stack in current_state:
+        output.append( "CL(" + stack[0] + ")")#first
+        for i in range(len(stack)-1):
+            output.append("ON(" + stack[i] +"," + stack[i+1] +")")
+        output.append( "ONT(" + stack[-1] + ")" ) # last
+
+    print(output)
+
+
 
 def print_current_state():
     print_arm_content()
@@ -63,6 +61,8 @@ def print_current_state():
                 print("    ", sep="", end="")
         max_length -= 1
         print('')
+    print("CURRENT STATE TEXT:")
+    current_state_text()
     print("-------------------------------\n")
 
 def print_arm_content():
@@ -244,3 +244,4 @@ for i in goal_state:
         solve(["ON", i[j], i[j + 1]])
     solve(["ONT", i[-1]])
     solve("AE")
+
