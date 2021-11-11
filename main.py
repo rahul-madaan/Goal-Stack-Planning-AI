@@ -89,6 +89,7 @@ def print_current_state():
                 print("    ", sep="", end="")
         max_length -= 1
         print('')
+    print("-------------------------------")
     print("CURRENT STATE TEXT:")
     current_state_text()
     print("-------------------------------\n")
