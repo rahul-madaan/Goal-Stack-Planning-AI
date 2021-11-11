@@ -1,0 +1,664 @@
+﻿TEST CASE 1:
+
+
+ENTER THE INITIAL STATE: YW XZ
+ENTER THE GOAL STATE: ZY XW
+INITIAL STATE
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Y] [X] 
+[W] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(X)', 'ON(X,Z)', 'ONT(Z)']
+-------------------------------
+
+
+UnStack X Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[X]/
+[Y]     
+[W] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(X)', 'CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(Z)', 'ONT(Z)']
+-------------------------------
+
+
+PutDown X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Y]         
+[W] [Z] [X] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(Z)', 'ONT(Z)', 'CL(X)', 'ONT(X)']
+-------------------------------
+
+
+PickUp Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Z]/
+[Y]     
+[W] [X] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Z)', 'CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(X)', 'ONT(X)']
+-------------------------------
+
+
+Stack Z Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Z]     
+[Y]     
+[W] [X] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Z)', 'ON(Z,Y)', 'ON(Y,W)', 'ONT(W)', 'CL(X)', 'ONT(X)']
+-------------------------------
+
+
+UnStack Z Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Z]/
+[Y]     
+[W] [X] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Z)', 'CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(X)', 'ONT(X)']
+-------------------------------
+
+
+PutDown Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Y]         
+[W] [X] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)']
+-------------------------------
+
+
+UnStack Y W
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Y]/
+[W] [X] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Y)', 'CL(W)', 'ONT(W)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)']
+-------------------------------
+
+
+PutDown Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[W] [X] [Z] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(W)', 'ONT(W)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+PickUp X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[X]/
+[W] [Z] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(X)', 'CL(W)', 'ONT(W)', 'CL(Z)', 'ONT(Z)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+Stack X W
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[X]         
+[W] [Z] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(X)', 'ON(X,W)', 'ONT(W)', 'CL(Z)', 'ONT(Z)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+PickUp Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Z]/
+[X]     
+[W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Z)', 'CL(X)', 'ON(X,W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+Stack Z Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[X] [Z] 
+[W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(X)', 'ON(X,W)', 'ONT(W)', 'CL(Z)', 'ON(Z,Y)', 'ONT(Y)']
+-------------------------------
+
+
+
+
+
+
+TEST CASE 2:
+ENTER THE INITIAL STATE: YX ZW
+ENTER THE GOAL STATE: XZ YW
+INITIAL STATE
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Y] [Z] 
+[X] [W] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Y)', 'ON(Y,X)', 'ONT(X)', 'CL(Z)', 'ON(Z,W)', 'ONT(W)']
+-------------------------------
+
+
+UnStack Y X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Y]/
+    [Z] 
+[X] [W] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Y)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ON(Z,W)', 'ONT(W)']
+-------------------------------
+
+
+PutDown Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+    [Z]     
+[X] [W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(X)', 'ONT(X)', 'CL(Z)', 'ON(Z,W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+PickUp X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[X]/
+[Z]     
+[W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(X)', 'CL(Z)', 'ON(Z,W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+Stack X Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[X]     
+[Z]     
+[W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(X)', 'ON(X,Z)', 'ON(Z,W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+UnStack X Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[X]/
+[Z]     
+[W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(X)', 'CL(Z)', 'ON(Z,W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+PutDown X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Z]         
+[W] [Y] [X] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Z)', 'ON(Z,W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)', 'CL(X)', 'ONT(X)']
+-------------------------------
+
+
+UnStack Z W
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Z]/
+[W] [Y] [X] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Z)', 'CL(W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)', 'CL(X)', 'ONT(X)']
+-------------------------------
+
+
+PutDown Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[W] [Y] [X] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)']
+-------------------------------
+
+
+PickUp Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Y]/
+[W] [X] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Y)', 'CL(W)', 'ONT(W)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)']
+-------------------------------
+
+
+Stack Y W
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Y]         
+[W] [X] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)']
+-------------------------------
+
+
+PickUp X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[X]/
+[Y]     
+[W] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(X)', 'CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(Z)', 'ONT(Z)']
+-------------------------------
+
+
+Stack X Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Y] [X] 
+[W] [Z] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Y)', 'ON(Y,W)', 'ONT(W)', 'CL(X)', 'ON(X,Z)', 'ONT(Z)']
+-------------------------------
+
+
+
+
+TEST CASE 3:
+ENTER THE INITIAL STATE: YX Z W
+ENTER THE GOAL STATE: XZ YW
+INITIAL STATE
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[Y]         
+[X] [Z] [W] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(Y)', 'ON(Y,X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)', 'CL(W)', 'ONT(W)']
+-------------------------------
+
+
+UnStack Y X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Y]/
+[X] [Z] [W] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Y)', 'CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)', 'CL(W)', 'ONT(W)']
+-------------------------------
+
+
+PutDown Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[X] [Z] [W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(X)', 'ONT(X)', 'CL(Z)', 'ONT(Z)', 'CL(W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+PickUp X
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[X]/
+[Z] [W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(X)', 'CL(Z)', 'ONT(Z)', 'CL(W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+Stack X Z
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[X]         
+[Z] [W] [Y] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(X)', 'ON(X,Z)', 'ONT(Z)', 'CL(W)', 'ONT(W)', 'CL(Y)', 'ONT(Y)']
+-------------------------------
+
+
+PickUp Y
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[Y]/
+[X]     
+[Z] [W] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(Y)', 'CL(X)', 'ON(X,Z)', 'ONT(Z)', 'CL(W)', 'ONT(W)']
+-------------------------------
+
+
+Stack Y W
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[X] [Y] 
+[Z] [W] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(X)', 'ON(X,Z)', 'ONT(Z)', 'CL(Y)', 'ON(Y,W)', 'ONT(W)']
+-------------------------------
+
+
+TEST CASE 4:
+ENTER THE INITIAL STATE: A EC DB
+ENTER THE GOAL STATE: B AC DB
+INITIAL STATE
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+    [E] [D] 
+[A] [C] [B] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(A)', 'ONT(A)', 'CL(E)', 'ON(E,C)', 'ONT(C)', 'CL(D)', 'ON(D,B)', 'ONT(B)']
+-------------------------------
+
+
+UnStack D B
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[D]/
+    [E]     
+[A] [C] [B] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(D)', 'CL(A)', 'ONT(A)', 'CL(E)', 'ON(E,C)', 'ONT(C)', 'CL(B)', 'ONT(B)']
+-------------------------------
+
+
+PutDown D
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+    [E]         
+[A] [C] [B] [D] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(A)', 'ONT(A)', 'CL(E)', 'ON(E,C)', 'ONT(C)', 'CL(B)', 'ONT(B)', 'CL(D)', 'ONT(D)']
+-------------------------------
+
+
+UnStack E C
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[E]/
+[A] [C] [B] [D] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(E)', 'CL(A)', 'ONT(A)', 'CL(C)', 'ONT(C)', 'CL(B)', 'ONT(B)', 'CL(D)', 'ONT(D)']
+-------------------------------
+
+
+PutDown E
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[A] [C] [B] [D] [E] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(A)', 'ONT(A)', 'CL(C)', 'ONT(C)', 'CL(B)', 'ONT(B)', 'CL(D)', 'ONT(D)', 'CL(E)', 'ONT(E)']
+-------------------------------
+
+
+PickUp A
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[A]/
+[C] [B] [D] [E] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(A)', 'CL(C)', 'ONT(C)', 'CL(B)', 'ONT(B)', 'CL(D)', 'ONT(D)', 'CL(E)', 'ONT(E)']
+-------------------------------
+
+
+Stack A C
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[A]             
+[C] [B] [D] [E] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(A)', 'ON(A,C)', 'ONT(C)', 'CL(B)', 'ONT(B)', 'CL(D)', 'ONT(D)', 'CL(E)', 'ONT(E)']
+-------------------------------
+
+
+PickUp D
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[D]/
+[A]         
+[C] [B] [E] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(D)', 'CL(A)', 'ON(A,C)', 'ONT(C)', 'CL(B)', 'ONT(B)', 'CL(E)', 'ONT(E)']
+-------------------------------
+
+
+Stack D B
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[A] [D]     
+[C] [B] [E] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(A)', 'ON(A,C)', 'ONT(C)', 'CL(D)', 'ON(D,B)', 'ONT(B)', 'CL(E)', 'ONT(E)']
+-------------------------------
+
+
+UnStack D B
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \[D]/
+[A]         
+[C] [B] [E] 
+-------------------------------
+CURRENT STATE TEXT:
+['HOLD(D)', 'CL(A)', 'ON(A,C)', 'ONT(C)', 'CL(B)', 'ONT(B)', 'CL(E)', 'ONT(E)']
+-------------------------------
+
+
+Stack D B
+UPDATED STATE:
+                         |
+                         |
+                        / \
+                       /   \
+                       \   /
+[A] [D]     
+[C] [B] [E] 
+-------------------------------
+CURRENT STATE TEXT:
+['CL(A)', 'ON(A,C)', 'ONT(C)', 'CL(D)', 'ON(D,B)', 'ONT(B)', 'CL(E)', 'ONT(E)']
+-------------------------------
